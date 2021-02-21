@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class varsToStart {
-
+//
 	public HashMap<String, String[]> rules;
 	public String axiom;
 	public HashMap<String, String> actions;
@@ -28,6 +28,5 @@ public class varsToStart {
 	//
 	//public String symbol (String lettre) {
 	//}
-	///
 
 }
