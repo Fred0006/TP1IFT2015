@@ -1,9 +1,15 @@
 package lindermayer;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+
 import org.json.*;
 
 public class LSystem {
-	public Symbol charactere;
+	
+	static ArrayList<Double> turtle_posX = new ArrayList(); // On enregistre la liste des positions de X.
+    static ArrayList<Double> turtle_posY = new ArrayList(); // On enregistre la liste des positions de y.
+	
+    public Symbol charactere;
 	
 	/**
      * constructeur vide monte un système avec alphabet vide et sans règles

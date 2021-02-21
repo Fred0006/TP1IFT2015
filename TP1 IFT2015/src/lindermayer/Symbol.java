@@ -2,19 +2,19 @@ package lindermayer;
 
 public class Symbol {
 	
-	private final char value;
-	
-    public Symbol(char c){
-        this.value = c;
+	char character;
+    String action;
+
+    public Symbol(char character){
+        this.character = character;
     }
-    
-    @Override
-    public String toString(){
-        return Character.toString(value);
+
+    public Symbol(char character, String action){
+        this.character = character;
+        this.action = action;
     }
     
     public interface Seq extends Iterable<Symbol>{
-    	
     }    
 
 }
