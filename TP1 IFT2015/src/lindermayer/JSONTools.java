@@ -13,10 +13,6 @@ import java.util.Map;
 
 import org.json.*;
 
-import LSystem.Sequence;
-import LSystem.Symbol;
-
-
 public class JSONTools{
 	public Arrays alphabet;
 	private HashMap<?,?> simbol; 
@@ -25,13 +21,7 @@ public class JSONTools{
 	
 	public JSONObject JSonObjc;
 	
-	
-<<<<<<< HEAD
 	public JSONTools(String fileName,LSystem S, MyTurtle T) throws IOException  {
-		
-=======
-	public JSONTools(String fileName,LSystem S, MyTurtle T)  {
->>>>>>> branch 'master' of https://github.com/Fred0006/TP1IFT2015
 		String file = "src/"+ fileName;
 		JSonObjc = readJSONFile(file);
 		setAxiom();
@@ -42,12 +32,8 @@ public class JSONTools{
 		// Set MyTurtle
 		MyTurtleSetUnits(T);
 		
-		
-		
-	}			
+		}			
 
-	
-	
 		public JSONObject readJSONFile(String file) throws java.io.IOException {
 			JSONObject jSonInput = new JSONObject(new JSONTokener(new java.io.FileReader("Instructions")));
 			return jSonInput;
@@ -55,57 +41,54 @@ public class JSONTools{
 			
 		
 		public void extractAlphabet() {
-			JSONArray alphabet = jSonInput.getJSONArray("alphabet");
+			JSONArray alphabet = JSonObjc.getJSONArray("alphabet");
 		}
 		
 		public void setAxiom(){
 			axiom = JSonObjc.getString("axiom");
 		}
 
-<<<<<<< HEAD
+
        LSystem.setAxiom(jSonInput.getString("axiom"));
-=======
+
 		
 		
 		JSONObject rules = jSonInput.getJSONObject("rules");
->>>>>>> branch 'master' of https://github.com/Fred0006/TP1IFT2015
 
 		for (int i = 0; i < alphabet.length(); i++) {
 			String letter = alphabet.getString(i);
 			Symbol sym = addSymbol(letter.charAt(0));
 
-<<<<<<< HEAD
+
        for (int i = 0; i < alphabet.length(); i++) {
            String letter = alphabet.getString(i);
            Symbol sym = LSystem.addSymbol(letter.charAt(0));
-=======
+
 			if (rules.has(letter)) {
 				JSONArray all_rules = rules.getJSONArray(letter);
 				for (int j = 0; j < all_rules.length(); j++) {
 					addRule(sym, all_rules.getString(j));
 				}
 			}
->>>>>>> branch 'master' of https://github.com/Fred0006/TP1IFT2015
 
-<<<<<<< HEAD
+
            if (rules.has(letter)) {
                JSONArray all_rules = rules.getJSONArray(letter);
                for (int j = 0; j < all_rules.length(); j++) {
             	   LSystem.addRule(sym, all_rules.getString(j));
                }
            }
-=======
+
 			
 			
 			JSONObject actions = jSonInput.getJSONObject("actions");
->>>>>>> branch 'master' of https://github.com/Fred0006/TP1IFT2015
 
 			if (actions.has(letter)) {
 				String letterAction = actions.getString(letter);
 				setAction(sym, letterAction);
 			}
 
-<<<<<<< HEAD
+
            if (actions.has(letter)) {
                String letterAction = actions.getString(letter);
                LSystem.setAction(sym, letterAction);
@@ -129,9 +112,9 @@ public class JSONTools{
 	    
        //return input;
        return system_params;
-   }
-=======
-		}
+       }
+
+		
 		private void extractRules() {
 	
 		
@@ -179,7 +162,6 @@ public class JSONTools{
 * actions: associations symbole → instruction de tortue
 * parameters: objet avec step (d), angle (δ), et start qui est un tableau avec 3 éléments numériques du l’état initial (x, y, θ)*/
 
->>>>>>> branch 'master' of https://github.com/Fred0006/TP1IFT2015
 	
 }
 

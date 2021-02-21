@@ -6,6 +6,8 @@ public class Symbol {
 	
 	char character;
     String action;
+	public char character;
+    public String action;
 
     public Symbol(char character){
         this.character = character;
@@ -15,6 +17,8 @@ public class Symbol {
         this.character = character;
         this.action = action;
     }
+    
+    
     
     public interface Seq extends Iterable<Symbol>{
     }

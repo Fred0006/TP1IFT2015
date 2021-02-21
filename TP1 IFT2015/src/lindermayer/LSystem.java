@@ -104,8 +104,19 @@ public class LSystem {////
    }
 =======
     /* op�rations avanc�es */
+<<<<<<< HEAD
     //public Symbol.Seq applyRules(Symbol.Seq seq, int n) {...}
 >>>>>>> tipo
+=======
+   public Symbol.Seq applyRules(Symbol.Seq seq, int n) {
+	   
+   }
+    /* retourne BoundingBox pour le dessin   public Rectangle2D tell(Turtle turtle, Symbol.Seq seq, int n){
+	   
+   }
+..}
+ 
+>>>>>>> new
     /* retourne BoundingBox pour le dessin */
    public Rectangle2D tell(Turtle turtle, Symbol.Seq seq, int n){
 	   
