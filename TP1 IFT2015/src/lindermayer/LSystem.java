@@ -92,13 +92,19 @@ public class LSystem {////
     	else if ("pop".equals(action))  
     		turtle.pop(); 
     	
+    	turtle_posX.add(turtle.getPosition().getX());
+    	turtle_posY.add(turtle.getPosition().getY());
     	
     }
  
     /* opérations avancées */
-    //public Symbol.Seq applyRules(Symbol.Seq seq, int n) {...}
+   public Symbol.Seq applyRules(Symbol.Seq seq, int n) {
+	   
+   }
     /* retourne BoundingBox pour le dessin */
-   // public Rectangle2D tell(Turtle turtle, Symbol.Seq seq, int n){ ...}
+   public Rectangle2D tell(Turtle turtle, Symbol.Seq seq, int n){
+	   
+   }
 
 	public static void readJSONFile(String file, LSystem S, Turtle T) throws java.io.IOException {
         JSONObject input = new JSONObject(new JSONTokener(new java.io.FileReader(file))); // lecture de fichier JSON avec JSONTokener
