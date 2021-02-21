@@ -6,7 +6,7 @@ import java.util.HashMap;
 import org.json.*;
 
 
-public class LSystem {
+public class LSystem {////
 	
 	static ArrayList<Double> turtle_posX = new ArrayList(); // On enregistre la liste des positions de X.
     static ArrayList<Double> turtle_posY = new ArrayList(); // On enregistre la liste des positions de y.

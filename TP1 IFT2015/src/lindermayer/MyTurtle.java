@@ -6,57 +6,43 @@ import java.util.Stack;
 public class MyTurtle implements Turtle {
 	public int distanceD; // A Revoir son utilite
 	public State currentState;
-    public Stack<State> previousStates = new Stack<>();
+    public Stack<State> previousStates;
     public double distanceUnitaire;
     public double angleUnitaire;
     
-    
-    private class State {
-    	
-    	public double posX;
-        public double posY;
-        public double angle;
-        
-        public State(double posX ,double posY, double angle){
-            this.posX = posX;
-            this.posY = posY;
-            this.angle = angle;
-    	} 
-    }
-
 	public MyTurtle(){
-
-	}
+		currentState = new State();
+		previousStates = new Stack<>();
+		}
 	
 	public void setPosition(double posX ,double posY, double angle) {
-		this.currentState = new State(posX,posY,angle);
+		currentState.setState(posX, posY, angle);
 	}
-	
 	
     @Override
     public void draw() {
-    	double nouveauX = distanceUnitaire*Math.cos(Math.toRadians(currentState.angle));
-        double nouveauY =distanceUnitaire*Math.sin(Math.toRadians(currentState.angle));
-        currentState = new State(nouveauX , nouveauY , currentState.angle);
+    	double nouveauX = distanceUnitaire*Math.cos(Math.toRadians(currentState.getAngle()));
+        double nouveauY =distanceUnitaire*Math.sin(Math.toRadians(currentState.getAngle()));
+        currentState.setState(nouveauX , nouveauY , currentState.getAngle());
     }
 
     @Override
     public void move() {
-    	double nouveauX = distanceUnitaire*Math.cos(Math.toRadians(currentState.angle));
-        double nouveauY =distanceUnitaire*Math.sin(Math.toRadians(currentState.angle));
-        currentState = new State(nouveauX , nouveauY , currentState.angle);
+    	double nouveauX = distanceUnitaire*Math.cos(Math.toRadians(currentState.getAngle()));
+        double nouveauY =distanceUnitaire*Math.sin(Math.toRadians(currentState.getAngle()));
+        currentState.setState(nouveauX , nouveauY , currentState.getAngle());
     }
 
     @Override
     public void turnR() {
-        double nouvelAngle = currentState.angle - angleUnitaire;
-        currentState = new State(currentState.posX , currentState.posY , nouvelAngle);
+        double nouvelAngle = currentState.getAngle() - angleUnitaire;
+        currentState.setState(currentState.getPosX() , currentState.getPosX(), nouvelAngle);
     }
 
     @Override
     public void turnL() {
-    	double nouvelAngle = currentState.angle + angleUnitaire;
-        currentState = new State(currentState.posX , currentState.posY , nouvelAngle);
+    	double nouvelAngle = currentState.getAngle() + angleUnitaire;
+        currentState.setState(currentState.getPosX(), currentState.getPosY() , nouvelAngle);
     }
 
     public void push() {
@@ -73,21 +59,64 @@ public class MyTurtle implements Turtle {
     }
 
     public void init(Point2D position, double angle_deg) {
-    	currentState = new State(position.getX() , position.getY() , angle_deg);
+    	currentState.setState(position.getX() , position.getY() , angle_deg);
     	previousStates.clear();
     }
 
     public Point2D getPosition() {
-        return new Point2D.Double(currentState.posX , currentState.posY);
+        return new Point2D.Double(currentState.getPosX() , currentState.getPosY());
     }
 
     public double getAngle() {
-        return currentState.angle;
+        return currentState.getAngle();
     }
 
     public void setUnits(double step, double delta) {
     	distanceUnitaire = step;
     	angleUnitaire = delta;
     }
+    
+    // State Class
+    private static class State {
+    	
+    	public double posX;
+    	public double posY;
+    	public double angle;
+        
+        public State(){
+           
+    	} 
+        
+        public void setState(double posX ,double posY, double angle) {
+        	this.posX = posX;
+        	this.posY = posY;
+        	this.angle = angle;
+        }
+        
+        public double getPosX() {
+			return posX;
+		}
 
-}
+		public void setPosX(double posX) {
+			this.posX = posX;
+		}
+
+		public double getPosY() {
+			return posY;
+		}
+
+		public void setPosY(double posY) {
+			this.posY = posY;
+		}
+
+		public double getAngle() {
+			return angle;
+		}
+
+		public void setAngle(double angle) {
+			this.angle = angle;
+		}
+        
+         
+    }
+  }
