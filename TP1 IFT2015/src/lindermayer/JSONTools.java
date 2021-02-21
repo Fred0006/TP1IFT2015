@@ -14,10 +14,21 @@ import java.util.Map;
 import org.json.*;
 
 public class JSONTools{
-	public Arrays alphabet;
+	public ArrayList<Symbol> alphabet;
 	private HashMap<?,?> simbol; 
 	public String axiom;
+	public HashMap<String, String[]> rulesSet;
+	public HashMap<String, String> actions;
+	public HashMap<String, ArrayList<?>> parameters;
 	
+    
+/*
+* alphabet: tableau de symboles (strings)
+* rules: règles comme un objet d’associations symbole → tableau de strings (toutes les règles pour un symbole)
+* axiom: chaîne de départ (string)
+* actions: associations symbole → instruction de tortue
+* parameters: objet avec step (d), angle (δ), et start qui est un tableau avec 3 éléments numériques du l’état initial (x, y, θ) */
+
 	
 	public JSONObject JSonObjc;
 	
@@ -148,15 +159,7 @@ public class JSONTools{
 		    T.setUnits(unit_step, unit_angle);  
 		}
 	  
-       
-/*
- *
- * alphabet: tableau de symboles (strings)
- * rules: règles comme un objet d’associations symbole → tableau de strings (toutes les règles pour un symbole)
-* axiom: chaîne de départ (string)
-* actions: associations symbole → instruction de tortue
-* parameters: objet avec step (d), angle (δ), et start qui est un tableau avec 3 éléments numériques du l’état initial (x, y, θ)*/
-
+ 
 	
 }
 
