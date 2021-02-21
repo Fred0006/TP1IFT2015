@@ -14,55 +14,58 @@ import java.util.Map;
 import org.json.*;
 
 public class JSONTools{
-	public ArrayList<Symbol> alphabet;
+	public ArrayList[] alphabet;
 	private HashMap<?,?> simbol; 
 	public String axiom;
 	public HashMap<String, String[]> rulesSet;
 	public HashMap<String, String> actions;
 	public HashMap<String, ArrayList<?>> parameters;
 	
-    
-/*
-* alphabet: tableau de symboles (strings)
-* rules: règles comme un objet d’associations symbole → tableau de strings (toutes les règles pour un symbole)
-* axiom: chaîne de départ (string)
-* actions: associations symbole → instruction de tortue
-* parameters: objet avec step (d), angle (δ), et start qui est un tableau avec 3 éléments numériques du l’état initial (x, y, θ) */
+    public JSONObject JSonObjc;
 
 	
-	public JSONObject JSonObjc;
 	
 	public JSONTools(String fileName,LSystem S, MyTurtle T) throws IOException  {
+		//init vars
+		
 		String file = "src/"+ fileName;
 		JSonObjc = readJSONFile(file);
-		setAxiom();
+		extractAlphabet();
+		getAxiom();
 		
 		// Set LSystem
-		S.
+		S.setAxiom(this.axiom);
 		
 		// Set MyTurtle
 		MyTurtleSetUnits(T);
-	
-		
-		
-		}			
+	}			
 
+	
+		////.... Vars extraction.....////
+	
 		public JSONObject readJSONFile(String file) throws java.io.IOException {
 			JSONObject jSonInput = new JSONObject(new JSONTokener(new java.io.FileReader("Instructions")));
 			return jSonInput;
 		}
 			
 		
+		@SuppressWarnings("unchecked")
 		public void extractAlphabet() {
-			JSONArray alphabet = JSonObjc.getJSONArray("alphabet");
+			JSONArray alph = JSonObjc.getJSONArray("alphabet");
+			alphabet = new ArrayList[alph.length()]; 
+			for(int i =0; i<alph.length();i++ ) {
+				Symbol sym = new Symbol((char) alph.get(i));
+				alphabet[i].add(sym);
+			}
 		}
 		
-		public void setAxiom(){
+		public void getAxiom(){
 			axiom = JSonObjc.getString("axiom");
+			
 		}
 
 
-        LSystem.setAxiom(jSonInput.getString("axiom"));
+        S.
 
 		
 		
