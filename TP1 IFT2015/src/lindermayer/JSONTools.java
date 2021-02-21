@@ -33,6 +33,7 @@ public class JSONTools{
        for (int i = 0; i < alphabet.length(); i++) {
            String letter = alphabet.getString(i);
            Symbol sym = addSymbol(letter.charAt(0));
+       }
 
            if (rules.has(letter)) {
                JSONArray all_rules = rules.getJSONArray(letter);

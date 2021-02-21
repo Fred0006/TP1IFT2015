@@ -7,7 +7,6 @@ public class Main {
 	public double y;
 	public double ang;
 	
-	public 
 	
 	public static void main(String args[]) {
 		
