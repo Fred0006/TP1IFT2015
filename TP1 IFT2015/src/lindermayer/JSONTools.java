@@ -6,7 +6,12 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import lindenmayer.LSystem;
+import lindenmayer.Turtle;
 
 
 public class JSONTools{
@@ -15,47 +20,20 @@ public class JSONTools{
 	public InputStream input;
 	
 	public JSONTools(String fileName)  {
-		String sourceName = "src/"+ fileName;
-		/*File path = new File(sourceName);
-		String jSonString = jSonReader(sourceName);
-		JSonObjc = getJSONObj(jSonString);
-		varNames = JSONObject.getNames(JSonObjc);  */
+		
+		String file = "src/"+ fileName;
+		JSonObjc = readJSONFile(file,null,null);
 	}			
-		
-	public JSONObject getJSONObj(String jSonString) {
-		return new JSONObject(jSonString);
-	}
-	
-	public boolean objExist(JSONObject jsonObj, String key) {
-		Object o;
-		try {
-			o = jsonObj.get(key);
-		} catch (Exception e){
-			return false;
-		}
-		return o != null;
-	}
-	
 
-		
-		public String jSonReader(String path) {	
-			try {
-				BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
-				String line = reader.readLine();
-				while(reader.readLine()!= null) {
-					line += reader.readLine();
-				}
-				reader.close();
-				return line;
-				
-			}catch (Exception e){
-				e.printStackTrace();
-			}
-			return null;
-		}
-		
+	public JSONObject readJSONFile(String file, LSystem S, Turtle T) throws java.io.IOException {
+        JSONObject input = new JSONObject(new JSONTokener(new java.io.FileReader(file))); // lecture de fichier JSON avec JSONTokener
+        JSONArray alphabet = input.getJSONArray("alphabet");
+        String axiom = input.getString("axiom");
+        String letter = alphabet.getString(0);
+        char sym = letter.charAt(0); // un caractère
+       // S.setAxiom(axiom);
+        
+       return input;
+}
 	
-	
-	
-
 }
