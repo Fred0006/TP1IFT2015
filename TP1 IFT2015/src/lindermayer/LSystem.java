@@ -89,7 +89,7 @@ public class LSystem {
     		turtle.turnR(); 
     	else if ("turnL".equals(action)) 
     		turtle.turnL(); 
-    	else if ("draw".equals(action))  
+    	else if ("push".equals(action))  
     		turtle.push(); 
     	else if ("pop".equals(action))  
     		turtle.pop(); 
