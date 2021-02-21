@@ -33,14 +33,14 @@ public class LSystem {
 	
 	// changement de la fonction en static car utilisation dans le JSON
 	
-    public static Symbol addSymbol(char sym) {
+    public Symbol addSymbol(char sym) {
     	Symbol symbol = new Symbol(sym);
     	charToSym.put(sym,symbol); //charToSym transformé en static dû au changement de la fonction en static
 		return charactere; // pareil à cahrTosym
 	}
     
     
-    public static void addRule(Symbol sym, String expansion) {
+    public void addRule(Symbol sym, String expansion) {
     	Sequence nouvelleSeq = new Sequence(expansion);
     	
     	// verifie que la clé à pas déja de liste de règles
@@ -54,16 +54,16 @@ public class LSystem {
     	}
    }
     
-    public static void setAction(Symbol sym, String action) {
+    public void setAction(Symbol sym, String action) {
     	sym.action = action;
     }
     
-    public static void setAxiom(String str){
+    public void setAxiom(String str){
     	axiom = str;
     }
     
-    public Symbol.Seq getAxiom(){
-    	return axiom;
+    public String getAxiom(){
+    	return LSystem.axiom;
     }
     
     public Symbol.Seq rewrite(Symbol sym) {
@@ -81,10 +81,10 @@ public class LSystem {
     public void tell(Turtle turtle, Symbol sym) {
     	String action = sym.action;
     	
-    	if("draw".equals(action)) { turtle.draw(); }
-    	else if ("move".equals(action))  {
+    	if("draw".equals(action))
+    		turtle.draw(); 
+    	else if ("move".equals(action))  
     		turtle.move(); 
-    	}
     	else if ("turnR".equals(action)) 
     		turtle.turnR(); 
     	else if ("turnL".equals(action)) 
