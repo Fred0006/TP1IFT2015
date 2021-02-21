@@ -25,7 +25,7 @@ public class MyTurtle implements Turtle {
     }
 
 	public MyTurtle(){
-		
+
 	}
 	
 	public void setPosition(double posX ,double posY, double angle) {
@@ -35,15 +35,15 @@ public class MyTurtle implements Turtle {
 	
     @Override
     public void draw() {
-    	double nouveauX = distanceUnitaire*Math.cos(currentState.angle);
-        double nouveauY =distanceUnitaire*Math.sin(currentState.angle);
+    	double nouveauX = distanceUnitaire*Math.cos(Math.toRadians(currentState.angle));
+        double nouveauY =distanceUnitaire*Math.sin(Math.toRadians(currentState.angle));
         currentState = new State(nouveauX , nouveauY , currentState.angle);
     }
 
     @Override
     public void move() {
-    	double nouveauX = distanceUnitaire*Math.cos(currentState.angle);
-        double nouveauY =distanceUnitaire*Math.sin(currentState.angle);
+    	double nouveauX = distanceUnitaire*Math.cos(Math.toRadians(currentState.angle));
+        double nouveauY =distanceUnitaire*Math.sin(Math.toRadians(currentState.angle));
         currentState = new State(nouveauX , nouveauY , currentState.angle);
     }
 
@@ -64,7 +64,8 @@ public class MyTurtle implements Turtle {
     }
 
     public void pop() {
-    	currentState = previousStates.pop();
+    	previousStates.pop();
+    	currentState = previousStates.peek();
     }
 
     public void stay() {
