@@ -107,18 +107,11 @@ public class JSONTools{
        double unit_step = system_params.getDouble("step");
        double unit_angle = system_params.getDouble("angle");
        
-       
-       //MyTurtle.setUnits(unit_step, unit_angle);
-	    
-       //return input;
+      
        return system_params;
        }
 
-		
-		private void extractRules() {
 	
-		
-		}
 	
 	     
 		JSONObject system_params = jSonInput.getJSONObject("parameters"); // tt ce qui a dans parameters
@@ -137,10 +130,11 @@ public class JSONTools{
 	      
 	  
 	  
-		  public Arrays<String[]> extractRules(){
+		  public HashMap<String,String> extractRules(){
+			  HashMap<String,String> rulesMap = new HashMap<String, String>()
+;
 			  
-			  
-		  
+			  return rulesMap;
 		  }
 	  // update L-System
 		  
