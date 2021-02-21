@@ -25,6 +25,7 @@ public class varsToStart {
 		actions.put("+","turnR");
 	}
 	
+	//
 	//public String symbol (String lettre) {
 	//}
 
