@@ -14,19 +14,16 @@ public class LSystem {////
     private static HashMap<Character,Symbol> charToSym = new HashMap<>(); // permet de faire le lien entre le nouveua charact�re jouter et sa classe symbole
     public static HashMap<Symbol, ArrayList<Sequence>> rules;
     // Je l'est chang� en type Sequence parceque getAxion nous oblige � retourner un element de type Symbol.seq
-	public static Sequence axiom;
+	public static String axiom;
 	public HashMap<String, String> actions;
 	// Tous les symbols n'ont pas de  rules mais on peut rajouter des rules � un symbol qui n'en avait pas.
 	public HashMap<String, ArrayList[]> parameters; // pas sur des assignation pour le hashMap
 	
-    public static Symbol charactere; // pas sur
+    public static Symbol charactere;
 	
-	/**
-     * constructeur vide monte un syst�me avec alphabet vide et sans r�gles
-     */
-    /* m�thodes d'initialisation de syst�me */
+	
 	public LSystem() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	// changement de la fonction en static car utilisation dans le JSON
@@ -57,11 +54,11 @@ public class LSystem {////
     }
     
     public static void setAxiom(String str){
-    	axiom = new Sequence(str);
+    	LSystem.axiom = str;
     }
     
-    public Symbol.Seq getAxiom(){
-    	return axiom;
+    public String getAxiom(){
+    	return LSystem.axiom;
     }
     
     public Symbol.Seq rewrite(Symbol sym) {
@@ -101,17 +98,8 @@ public class LSystem {////
     /* op�rations avanc�es */
    public Symbol.Seq applyRules(Symbol.Seq seq, int n) {
 	   
-
-   public Symbol.Seq applyRules(Symbol.Seq seq, int n) {
-	   
    }
-    /* retourne BoundingBox pour le dessin   public Rectangle2D tell(Turtle turtle, Symbol.Seq seq, int n){
-	   
-   }
-..}
- 
->
-    /* retourne BoundingBox pour le dessin */
+    //retourne BoundingBox pour le dessin   public Rectangle2D tell(Turtle turtle, Symbol.Seq seq, int n){
    public Rectangle2D tell(Turtle turtle, Symbol.Seq seq, int n){
 	   
    }
