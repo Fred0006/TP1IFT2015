@@ -4,8 +4,6 @@ import java.util.*;
 
 public class Symbol {
 	
-	char character;
-    String action;
 	public char character;
     public String action;
 
