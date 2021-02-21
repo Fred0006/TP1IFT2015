@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.Stack;
 
 public class MyTurtle implements Turtle {
-	public int distanceD; // A Revoir son utilité
+	public int distanceD; // A Revoir son utilitï¿½
 	public State currentState;
     public Stack<State> previousStates = new Stack<>();
     public double distanceUnitaire;
@@ -25,13 +25,14 @@ public class MyTurtle implements Turtle {
     }
 
 	public MyTurtle(){
+
 	}
 	
-	public void setPosition (double posX ,double posY, double angle) {
+	public void setPosition(double posX ,double posY, double angle) {
 		this.currentState = new State(posX,posY,angle);
 	}
 	
-
+	
     @Override
     public void draw() {
     	double nouveauX = distanceUnitaire*Math.cos(Math.toRadians(currentState.angle));
@@ -68,7 +69,7 @@ public class MyTurtle implements Turtle {
     }
 
     public void stay() {
-    	// Ne sert À......RIEN
+    	// Ne sert ï¿½......RIEN
     }
 
     public void init(Point2D position, double angle_deg) {
