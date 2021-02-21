@@ -27,10 +27,12 @@ public class JSONTools{
 		setAxiom();
 		
 		// Set LSystem
-		
+		S.
 		
 		// Set MyTurtle
 		MyTurtleSetUnits(T);
+	
+		
 		
 		}			
 
@@ -49,7 +51,7 @@ public class JSONTools{
 		}
 
 
-       LSystem.setAxiom(jSonInput.getString("axiom"));
+        LSystem.setAxiom(jSonInput.getString("axiom"));
 
 		
 		
@@ -130,9 +132,8 @@ public class JSONTools{
 	      
 	  
 	  
-		  public HashMap<String,String> extractRules(){
-			  HashMap<String,String> rulesMap = new HashMap<String, String>()
-;
+		  public HashMap<?,?> extractRules(String S,String S){
+			  HashMap<String,String> rulesMap = new HashMap<String, String>();
 			  
 			  return rulesMap;
 		  }
