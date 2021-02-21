@@ -5,15 +5,6 @@ import org.json.*;
 public class LSystem {
 	public Symbol charactere;
 	
-	public class Symbol {
-		
-		public String caractere;
-		
-		public Symbol(String caractere) {
-			this.caractere = caractere;
-		}
-	}
-	
 	/**
      * constructeur vide monte un système avec alphabet vide et sans règles
      */
@@ -23,7 +14,7 @@ public class LSystem {
 	}
 	
     public Symbol addSymbol(char sym) {
-		return charactere;
+		return charactere; 
 	}
     public void addRule(Symbol sym, String expansion) {
     	
@@ -36,7 +27,9 @@ public class LSystem {
     }
  
     /* accès aux règles et exécution */
-   // public Symbol.Seq getAxiom(){}
+    public Symbol.Seq getAxiom(){
+		return null;
+		}
     //public Symbol.Seq rewrite(Symbol sym) {}
     public void tell(Turtle turtle, Symbol sym) {
     	
