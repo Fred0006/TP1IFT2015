@@ -88,8 +88,8 @@ public class LSystem {
     	else if ("turnR".equals(action)) 
     		turtle.turnR(); 
     	else if ("turnL".equals(action)) 
-    		turtle.turnL(); 
-    	else if ("draw".equals(action))  
+    		turtle.turnL();
+    	else if ("push".equals(action))  
     		turtle.push(); 
     	else if ("pop".equals(action))  
     		turtle.pop(); 
@@ -138,5 +138,6 @@ public class LSystem {
         JSONArray alphabet = input.getJSONArray("alphabet");
         String axiom = input.getString("axiom");
 	}
+
 
 }
