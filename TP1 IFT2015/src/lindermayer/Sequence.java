@@ -33,28 +33,4 @@ class Sequence implements Seq {// implementer une liste de symbol
         return seq.charAt(index-1);
     }
 	
-	/*
-	 * public class MyIterator<Symbol> implements Iterator<Symbol> {
-		
-		int positionIndex = 0;
-		ArrayList<Symbol> listeInterne;
-		
-		public MyIterator(ArrayList<Symbol> listeInterne) {
-			this.listeInterne = listeInterne;
-		}
-		
-		@Override
-		public boolean hasNext(){
-	        return index < seq.length();
-	    }
-	    
-		@Override
-	    public Symbol next(){
-	        index++;
-	        return seq.charAt(index-1);
-	    }
-	}
-	 */
-	
-	
 }

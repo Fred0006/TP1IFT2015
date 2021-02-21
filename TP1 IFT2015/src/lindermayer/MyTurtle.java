@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.Stack;
 
 public class MyTurtle implements Turtle {
-	public int distanceD; // A Revoir son utilit�
+	public int distanceD; // A Revoir son utilite
 	public State currentState;
     public Stack<State> previousStates = new Stack<>();
     public double distanceUnitaire;

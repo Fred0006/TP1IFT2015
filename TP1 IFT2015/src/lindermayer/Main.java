@@ -1,5 +1,6 @@
 package lindermayer;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main {
@@ -8,12 +9,12 @@ public class Main {
 	public double ang;
 	
 	
-	public static void main(String args[]) {
+	public static void main(String args[]) throws IOException {
 		
 		Start(args[0]);
 	}
 	
-	public static void Start(String s) {
+	public static void Start(String s) throws IOException {
 		LSystem lSyst = new LSystem();
 		MyTurtle tortue = new MyTurtle();
 		JSONTools jSon = new JSONTools(s,lSyst, tortue);

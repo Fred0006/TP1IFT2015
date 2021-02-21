@@ -10,14 +10,16 @@ public class LSystem {
 	
 	static ArrayList<Double> turtle_posX = new ArrayList(); // On enregistre la liste des positions de X.
     static ArrayList<Double> turtle_posY = new ArrayList(); // On enregistre la liste des positions de y.
-    private HashMap<Character,Symbol> charToSym = new HashMap<>(); // permet de faire le lien entre le nouveua charactère jouter et sa classe symbole
-    public HashMap<String, String[]> rules;
-	public String axiom;
+    
+    private static HashMap<Character,Symbol> charToSym = new HashMap<>(); // permet de faire le lien entre le nouveua charactère jouter et sa classe symbole
+    public static HashMap<Symbol, ArrayList<Sequence>> rules;
+    // Je l'est changé en type Sequence parceque getAxion nous oblige à retourner un element de type Symbol.seq
+	public static Sequence axiom;
 	public HashMap<String, String> actions;
 	// Tous les symbols n'ont pas de  rules mais on peut rajouter des rules ç un symbol qui n'en avait pas.
-	public HashMap<String, ArrayList[]> parameters; 
+	public HashMap<String, ArrayList[]> parameters; // pas sur des assignation pour le hashMap
 	
-    public Symbol charactere; // pas sur
+    public static Symbol charactere; // pas sur
 	
 	/**
      * constructeur vide monte un système avec alphabet vide et sans règles
@@ -27,31 +29,69 @@ public class LSystem {
 		// TODO Auto-generated constructor stub
 	}
 	
-    public Symbol addSymbol(char sym) {
+	// changement de la fonction en static car utilisation dans le JSON
+	
+    public static Symbol addSymbol(char sym) {
     	Symbol symbol = new Symbol(sym);
-    	charToSym.put(sym,symbol);
-		return charactere; 
+    	charToSym.put(sym,symbol); //charToSym transformé en static dû au changement de la fonction en static
+		return charactere; // pareil à cahrTosym
 	}
-    public void addRule(Symbol sym, String expansion) {
-    	Sequence seq = new Sequence(expansion);
+    
+    
+    public static void addRule(Symbol sym, String expansion) {
+    	Sequence nouvelleSeq = new Sequence(expansion);
     	
+    	// verifie que la clé à pas déja de liste de règles
     	if(rules.containsKey(sym)) {
+    		rules.get(sym).add(nouvelleSeq);
     	}
-    	
+    	else { // si on attribut une sequence à une nouvelle clé qui n'en avait pas avant
+    		ArrayList<Sequence> ruleForKey = new ArrayList<>();
+        	ruleForKey.add(nouvelleSeq);
+        	rules.put(sym, ruleForKey);
+    	}
+   }
+    
+    public static void setAction(Symbol sym, String action) {
+    	sym.action = action;
     }
-    public void setAction(Symbol sym, String action) {
-    	
+    
+    public static void setAxiom(String str){
+    	axiom = new Sequence(str);
     }
-    public void setAxiom(String str){
-    	
-    }
- 
-    /* accès aux règles et exécution */
+    
     public Symbol.Seq getAxiom(){
-		return null;
-		}
-    //public Symbol.Seq rewrite(Symbol sym) {}
+    	return axiom;
+    }
+    
+    public Symbol.Seq rewrite(Symbol sym) {
+    	ArrayList<Sequence> rulesOfKey = rules.get(sym);
+    	
+    	if(rulesOfKey != null) {
+    		int choixAlea = (int) Math.floor(Math.random()*rulesOfKey.size());
+        	return rulesOfKey.get(choixAlea);
+    	}
+    	else {
+    		return null;
+    	}
+    	}
+    
     public void tell(Turtle turtle, Symbol sym) {
+    	String action = sym.action;
+    	
+    	if("draw".equals(action)) { turtle.draw(); }
+    	else if ("move".equals(action))  {
+    		turtle.move(); 
+    	}
+    	else if ("turnR".equals(action)) 
+    		turtle.turnR(); 
+    	else if ("turnL".equals(action)) 
+    		turtle.turnL(); 
+    	else if ("draw".equals(action))  
+    		turtle.push(); 
+    	else if ("pop".equals(action))  
+    		turtle.pop(); 
+    	
     	
     }
  
