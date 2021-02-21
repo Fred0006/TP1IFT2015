@@ -28,4 +28,5 @@ public class varsToStart {
 	//
 	//public String symbol (String lettre) {
 	//}
+	//
 }
