@@ -7,19 +7,20 @@ public class Main {
 	public double y;
 	public double ang;
 	
-	public static void main(String[] args) {
+	public 
+	
+	public static void main(String args[]) {
 		
 		Start(args[0]);
-		
-		
-		
 	}
 	
 	public static void Start(String s) {
 		LSystem lSyst = new LSystem();
-		MyTurtle tortue = new MyTurtle(null,null,null);
+		MyTurtle tortue = new MyTurtle();
 		JSONTools jSon = new JSONTools(s,lSyst, tortue);
 		
+		jSon.JSonObjc.get(s);
+			
 	}
 	
 	
