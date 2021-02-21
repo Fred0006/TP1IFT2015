@@ -59,7 +59,7 @@ public class LSystem {
     }
     
     public static void setAxiom(String str){
-    	axiom = new Sequence(str);
+    	axiom = str;
     }
     
     public Symbol.Seq getAxiom(){
