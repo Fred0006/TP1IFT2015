@@ -21,24 +21,19 @@ public class LSystem {
 	// Tous les symbols n'ont pas de  rules mais on peut rajouter des rules ç un symbol qui n'en avait pas.
 	public HashMap<String, ArrayList[]> parameters; // pas sur des assignation pour le hashMap
 	
-    public static Symbol charactere; // pas sur
+	public static Sequence sequebceFinal;
 	
-	/**
-     * constructeur vide monte un système avec alphabet vide et sans règles
-     */
-    /* méthodes d'initialisation de système */
-	public LSystem() {
-		// TODO Auto-generated constructor stub
-	}
+    public LSystem() {
+    	sequebceFinal = new Sequence("");
+    }
 	
 	// changement de la fonction en static car utilisation dans le JSON
 	
     public Symbol addSymbol(char sym) {
     	Symbol symbol = new Symbol(sym);
     	charToSym.put(sym,symbol); //charToSym transformé en static dû au changement de la fonction en static
-		return charactere; // pareil à cahrTosym
+		return symbol; // pareil à cahrTosym
 	}
-    
     
     public void addRule(Symbol sym, String expansion) {
     	Sequence nouvelleSeq = new Sequence(expansion);
@@ -52,7 +47,7 @@ public class LSystem {
         	ruleForKey.add(nouvelleSeq);
         	rules.put(sym, ruleForKey);
     	}
-   }
+    }
     
     public void setAction(Symbol sym, String action) {
     	sym.action = action;
@@ -61,8 +56,7 @@ public class LSystem {
     public  void setAxiom(String str){
     	axiom = new Sequence(str);
     }
-    
-    
+     
     public Sequence getAxiom(){
     	return LSystem.axiom;
     }
@@ -104,15 +98,13 @@ public class LSystem {
     	if(n==0) {
     		return seq;
     	}
-    	
-        Sequence seqReponse = new Sequence("");
-        
+       
         while (seq.hasNext()) {
             Symbol sym = charToSym.get(seq.next());
-            seqReponse.seq = seqReponse.seq + rewrite(sym);
+            this.sequebceFinal.seq = this.sequebceFinal.seq + rewrite(sym);
             }
-        
-        return applyRules(seqReponse,n-1);// Retourne la sequence final 
+        applyRules(this.sequebceFinal,n-1);
+        return this.sequebceFinal;// Retourne la sequence final 
     	
     }
     
@@ -134,11 +126,5 @@ public class LSystem {
         return rectangle;
     }
 
-	public static void readJSONFile(String file, LSystem S, Turtle T) throws java.io.IOException {
-        JSONObject input = new JSONObject(new JSONTokener(new java.io.FileReader(file))); // lecture de fichier JSON avec JSONTokener
-        JSONArray alphabet = input.getJSONArray("alphabet");
-        String axiom = input.getString("axiom");
-	}
-
-
+	
 }

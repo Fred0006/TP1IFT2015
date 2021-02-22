@@ -14,9 +14,8 @@ import java.util.Map;
 import org.json.*;
 
 public class JSONTools{
-	public ArrayList[] alphabet;
-	//private HashMap<?,?> simbol; 
-	
+	public ArrayList<String> alphabet;
+	public HashMap<?,?> simbol; 
 	public String axiom;
 	public HashMap<String, String[]> rulesSet;
 	public HashMap<String, String> actions;
@@ -36,81 +35,72 @@ public class JSONTools{
 		
 		// Set LSystem
 		S.setAxiom(this.axiom);
+		createRulesSet(S);
 		
 		// Set MyTurtle
 		MyTurtleSetUnits(T);
 	}			
 
-	
-		////.... Variables extraction.....////
+			////.... Variables extraction.....////
+
 	
 		public JSONObject readJSONFile(String file) throws java.io.IOException {
 			JSONObject jSonInput = new JSONObject(new JSONTokener(new java.io.FileReader("Instructions")));
 			return jSonInput;
 		}
 			
-		
+		//alphabet
 		@SuppressWarnings("unchecked")
 		public void extractAlphabet() {
 			JSONArray alph = JSonObjc.getJSONArray("alphabet");
-			alphabet = new ArrayList[alph.length()]; 
 			for(int i =0; i<alph.length();i++ ) {
-				Symbol sym = new Symbol((char) alph.get(i));
-				alphabet[i].add(sym);
+				String sym = (String) alph.get(i);
+				this.alphabet.add(i, sym);
 			}
 		}
 		
+		//axiom
 		public void getAxiom(){
-			axiom = JSonObjc.getString("axiom");
-			
+			axiom = JSonObjc.getString("axiom");	
 		}
 
-		JSONObject rules = JSonObjc.getJSONObject("rules");
-			
-		public void buildRulesSet() {
-			for (int i = 0; i < alphabet.length(); i++) {
-				String letter = alphabet.getString(i);
-				Symbol sym = addSymbol(letter.charAt(0));
-			}
-	
-	       for (int i = 0; i < alphabet.length(); i++) {
-	           String letter = alphabet.getString(i);
-	           Symbol sym = LSystem.addSymbol(letter.charAt(0));
+		
+		// rules
+		public void createRulesSet(LSystem LSys) {
+					/*  from LSystem  public void addRule(Symbol sym, String expansion)  */
+		
+			JSONObject rules = this.JSonObjc.getJSONObject("rules"); 
+
+			for (int i = 0; i < this.alphabet.size(); i++) {
+				String letter = this.alphabet.get(i);
+				Symbol sym = LSys.addSymbol(letter.charAt(0));
 	
 				if (rules.has(letter)) {
 					JSONArray all_rules = rules.getJSONArray(letter);
-					for (int j = 0; j < all_rules.length(); j++) {
-						addRule(sym, all_rules.getString(j));
+					for (int k = 0; k < all_rules.length(); k++) {
+						LSys.addRule(sym, all_rules.getString(k));
 					}
 				}
-	
-	
-	           if (rules.has(letter)) {
-	               JSONArray all_rules = rules.getJSONArray(letter);
-	               for (int j = 0; j < all_rules.length(); j++) {
-	            	   LSystem.addRule(sym, all_rules.getString(j));
-	               }
-	           }
-	
-				
-				
-				JSONObject actions = jSonInput.getJSONObject("actions");
+	       }
+	  	}	
+       
+		
+		public void setActions() {
+			JSONObject actions = jSonInput.getJSONObject("actions");
 	
 				if (actions.has(letter)) {
 					String letterAction = actions.getString(letter);
 					setAction(sym, letterAction);
 				}
-	
-	
-	           if (actions.has(letter)) {
+				
+				if (actions.has(letter)) {
 	               String letterAction = actions.getString(letter);
 	               LSystem.setAction(sym, letterAction);
 	           }
 
-	       }
-		}
-       
-       JSONObject system_params = jSonInput.getJSONObject("parameters"); // tt ce qui a dans parameters
+		}		
+		/*
+       JSONObject system_params = this.JSonObjc.getJSONObject("parameters"); // tt ce qui a dans parameters
        JSONArray startJSON = system_params.getJSONArray("start"); // recupere le tableau start
        double start[] = new double[3];
        for(int i=0; i<=2; i++){
@@ -123,17 +113,17 @@ public class JSONTools{
        
       
        return system_params;
-       
+		 */
 
 	
 	
 	     
-		JSONObject system_params = jSonInput.getJSONObject("parameters"); // tt ce qui a dans parameters
+		   JSONObject system_params = this.JSonObjc.getJSONObject("parameters"); // tt ce qui a dans parameters
 
 	       JSONArray startJSON = system_params.getJSONArray("start"); // recupere le tableau start
 	       double start[] = new double[3];
-	       for(int i=0; i<=2; i++){
-	           start[i] = Double.parseDouble(startJSON.getString(i));
+	       for(int n=0; i<=2; i++){
+	           start[n] = Double.parseDouble(startJSON.getString(n));
 	       }
 
 	       MyTurtle.init(new Position(start[0],start[1]),start[2]);
@@ -144,15 +134,15 @@ public class JSONTools{
 	      
 	  
 	  
-		  public HashMap<?,?> extractRules(String S,String S){
-			  HashMap<String,String> rulesMap = new HashMap<String, String>();
+		  public HashMap<String,String> extractRules(String S, String A) {
+			HashMap<String,String> rulesMap = new HashMap<String, String>();
 			  
 			  return rulesMap;
 		  }
 	  // update L-System
 		  
 		  
-		  
+  
 		  
 		  
 	 // Update MyTurtle

@@ -10,7 +10,6 @@ class Sequence implements Seq {// implementer une liste de symbol
     public int index = 0;
     public ArrayList<Symbol> listSymbol = new ArrayList<>();
     
-    
     public Sequence(String seq){
         this.seq = seq;
     }
@@ -33,4 +32,9 @@ class Sequence implements Seq {// implementer une liste de symbol
         return seq.charAt(index-1);
     }
 	
+    public String toString() {
+    	System.out.println(this.seq);
+    	return this.seq;
+    }
+    
 }
