@@ -3,14 +3,14 @@ package lindermayer;
 
 public class Symbol {
 	
-	public char character;
+	public String character;
     public String action;
 
-    public Symbol(char character){
+    public Symbol(String character){
         this.character = character;
     }
 
-    public Symbol(char character, String action){
+    public Symbol(String character, String action){
         this.character = character;
         this.action = action;
     }
