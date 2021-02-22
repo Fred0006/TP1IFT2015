@@ -16,7 +16,7 @@ public class LSystem {
     private static HashMap<Character,Symbol> charToSym = new HashMap<>(); // permet de faire le lien entre le nouveua charactère jouter et sa classe symbole
     public static HashMap<Symbol, ArrayList<Sequence>> rules;
     // Je l'est changé en type Sequence parceque getAxion nous oblige à retourner un element de type Symbol.seq
-	public static String axiom;
+	public static Sequence axiom;
 	public HashMap<String, String> actions;
 	// Tous les symbols n'ont pas de  rules mais on peut rajouter des rules ç un symbol qui n'en avait pas.
 	public HashMap<String, ArrayList[]> parameters; // pas sur des assignation pour le hashMap
@@ -58,11 +58,12 @@ public class LSystem {
     	sym.action = action;
     }
     
-    public void setAxiom(String str){
-    	axiom = str;
+    public  void setAxiom(String str){
+    	axiom = new Sequence(str);
     }
     
-    public String getAxiom(){
+    
+    public Sequence getAxiom(){
     	return LSystem.axiom;
     }
     
