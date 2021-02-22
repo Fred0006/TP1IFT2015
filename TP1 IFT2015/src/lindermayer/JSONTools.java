@@ -70,7 +70,8 @@ public class JSONTools{
 					/*  from LSystem  public void addRule(Symbol sym, String expansion)  */
 		
 			JSONObject rules = this.JSonObjc.getJSONObject("rules"); 
-
+			
+			
 			for (int i = 0; i < this.alphabet.size(); i++) {
 				String letter = this.alphabet.get(i);
 				Symbol sym = LSys.addSymbol(letter.charAt(0));
@@ -81,12 +82,12 @@ public class JSONTools{
 						LSys.addRule(sym, all_rules.getString(k));
 					}
 				}
-	       }
+			 }
 	  	}	
        
 		
 		public void setActions() {
-			JSONObject actions = jSonInput.getJSONObject("actions");
+				JSONObject actions = jSonInput.getJSONObject("actions");
 	
 				if (actions.has(letter)) {
 					String letterAction = actions.getString(letter);
