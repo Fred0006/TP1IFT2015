@@ -1,4 +1,5 @@
 package lindermayer;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -12,19 +13,26 @@ public class Main {
 		//public static 
 		
 		
-		public static void main(String args[]) {
+		public static void main(String[] args) throws IOException {
 			
-			Start(args[0]);
-			
-		}
-		
-		public static void Start(String s) {
 			LSystem lSyst = new LSystem();
 			MyTurtle tortue = new MyTurtle();
-			JSONTools jSon = new JSONTools(s,lSyst, tortue);
+			JSONTools jSon = new JSONTools(args[0],lSyst, tortue);
+			int iter = Integer.parseInt(args[1]);
 			
-			jSon.JSonObjc.get(s);
-				
+			lSyst.applyRules(lSyst.axiom, iter);
+			
+			String SequenceFInal = lSyst.sequebceFinal.seq;
+			System.out.println(SequenceFInal);
+			
+			
+			
+			
+			lSyst.tell(tortue, null);
+			
+			
+		
+		
 		}
 		
 		

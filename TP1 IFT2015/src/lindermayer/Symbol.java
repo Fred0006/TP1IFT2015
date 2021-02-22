@@ -18,11 +18,8 @@ public class Symbol {
         this.action = action;
     }
     
-    
-    
     public interface Seq extends Iterable<Symbol>{
-
-		public boolean hasNext();
+    	public boolean hasNext();
 		public Character next();
     }
     
