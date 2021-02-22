@@ -15,7 +15,8 @@ import org.json.*;
 
 public class JSONTools{
 	public ArrayList[] alphabet;
-	private HashMap<?,?> simbol; 
+	//private HashMap<?,?> simbol; 
+	
 	public String axiom;
 	public HashMap<String, String[]> rulesSet;
 	public HashMap<String, String> actions;
@@ -41,7 +42,7 @@ public class JSONTools{
 	}			
 
 	
-		////.... Vars extraction.....////
+		////.... Variables extraction.....////
 	
 		public JSONObject readJSONFile(String file) throws java.io.IOException {
 			JSONObject jSonInput = new JSONObject(new JSONTokener(new java.io.FileReader("Instructions")));
@@ -64,53 +65,50 @@ public class JSONTools{
 			
 		}
 
-
-        S.
-
-		
-		
-		JSONObject rules = jSonInput.getJSONObject("rules");
-
-		for (int i = 0; i < alphabet.length(); i++) {
-			String letter = alphabet.getString(i);
-			Symbol sym = addSymbol(letter.charAt(0));
-
-
-       for (int i = 0; i < alphabet.length(); i++) {
-           String letter = alphabet.getString(i);
-           Symbol sym = LSystem.addSymbol(letter.charAt(0));
-
-			if (rules.has(letter)) {
-				JSONArray all_rules = rules.getJSONArray(letter);
-				for (int j = 0; j < all_rules.length(); j++) {
-					addRule(sym, all_rules.getString(j));
+		JSONObject rules = JSonObjc.getJSONObject("rules");
+			
+		public void buildRulesSet() {
+			for (int i = 0; i < alphabet.length(); i++) {
+				String letter = alphabet.getString(i);
+				Symbol sym = addSymbol(letter.charAt(0));
+			}
+	
+	       for (int i = 0; i < alphabet.length(); i++) {
+	           String letter = alphabet.getString(i);
+	           Symbol sym = LSystem.addSymbol(letter.charAt(0));
+	
+				if (rules.has(letter)) {
+					JSONArray all_rules = rules.getJSONArray(letter);
+					for (int j = 0; j < all_rules.length(); j++) {
+						addRule(sym, all_rules.getString(j));
+					}
 				}
-			}
+	
+	
+	           if (rules.has(letter)) {
+	               JSONArray all_rules = rules.getJSONArray(letter);
+	               for (int j = 0; j < all_rules.length(); j++) {
+	            	   LSystem.addRule(sym, all_rules.getString(j));
+	               }
+	           }
+	
+				
+				
+				JSONObject actions = jSonInput.getJSONObject("actions");
+	
+				if (actions.has(letter)) {
+					String letterAction = actions.getString(letter);
+					setAction(sym, letterAction);
+				}
+	
+	
+	           if (actions.has(letter)) {
+	               String letterAction = actions.getString(letter);
+	               LSystem.setAction(sym, letterAction);
+	           }
 
-
-           if (rules.has(letter)) {
-               JSONArray all_rules = rules.getJSONArray(letter);
-               for (int j = 0; j < all_rules.length(); j++) {
-            	   LSystem.addRule(sym, all_rules.getString(j));
-               }
-           }
-
-			
-			
-			JSONObject actions = jSonInput.getJSONObject("actions");
-
-			if (actions.has(letter)) {
-				String letterAction = actions.getString(letter);
-				setAction(sym, letterAction);
-			}
-
-
-           if (actions.has(letter)) {
-               String letterAction = actions.getString(letter);
-               LSystem.setAction(sym, letterAction);
-           }
-
-       }
+	       }
+		}
        
        JSONObject system_params = jSonInput.getJSONObject("parameters"); // tt ce qui a dans parameters
        JSONArray startJSON = system_params.getJSONArray("start"); // recupere le tableau start
@@ -125,7 +123,7 @@ public class JSONTools{
        
       
        return system_params;
-       }
+       
 
 	
 	
