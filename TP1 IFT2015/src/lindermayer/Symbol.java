@@ -1,8 +1,5 @@
 package lindermayer;
 
-import java.util.*;
-
-import lindermayer.Symbol.Seq;
 
 public class Symbol {
 	
@@ -19,11 +16,9 @@ public class Symbol {
     }
     
     public interface Seq extends Iterable<Symbol>{
-    	public boolean hasNext();
+		public boolean hasNext();
+
 		public Character next();
     }
-    
-    
-    
-
+ 
 }
