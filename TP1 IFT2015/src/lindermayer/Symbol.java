@@ -1,6 +1,8 @@
 package lindermayer;
 
 
+import lindermayer.Symbol.Seq;
+
 public class Symbol {
 	
 	public String character;
@@ -16,7 +18,10 @@ public class Symbol {
     }
     
     public interface Seq extends Iterable<Symbol>{
-		public boolean hasNext();
+  	public boolean hasNext();
+		public Character next();
+    }
+   
 
 		public Character next();
     }
