@@ -12,11 +12,14 @@ public class LSystem {
 	
 	static ArrayList<Double> turtle_posX = new ArrayList(); // On enregistre la liste des positions de X.
     static ArrayList<Double> turtle_posY = new ArrayList(); // On enregistre la liste des positions de y.
+    static ArrayList<Double> turtle_angle = new ArrayList();
     
-    private static HashMap<Character,Symbol> charToSym = new HashMap<>(); // permet de faire le lien entre le nouveua charactère jouter et sa classe symbole
+    public static HashMap<String,Symbol> charToSym = new HashMap<>(); // permet de faire le lien entre le nouveua charactère jouter et sa classe symbole
     public static HashMap<Symbol, ArrayList<Sequence>> rules;
     // Je l'est changé en type Sequence parceque getAxion nous oblige à retourner un element de type Symbol.seq
-	public static Sequence axiom;
+
+	public  Sequence axiom;
+
 	public HashMap<String, String> actions;
 	// Tous les symbols n'ont pas de  rules mais on peut rajouter des rules ç un symbol qui n'en avait pas.
 	public HashMap<String, ArrayList[]> parameters; // pas sur des assignation pour le hashMap
@@ -24,12 +27,17 @@ public class LSystem {
 	public static Sequence sequebceFinal;
 	
     public LSystem() {
+    	rules = new HashMap<Symbol, ArrayList<Sequence>> ();
+    	actions = new HashMap<String, String>();
     	sequebceFinal = new Sequence("");
     }
 	
 	// changement de la fonction en static car utilisation dans le JSON
 	
-    public Symbol addSymbol(char sym) {
+
+    public Symbol addSymbol(String sym) {
+
+    
     	Symbol symbol = new Symbol(sym);
     	charToSym.put(sym,symbol); //charToSym transformé en static dû au changement de la fonction en static
 		return symbol; // pareil à cahrTosym
@@ -51,6 +59,7 @@ public class LSystem {
     
     public void setAction(Symbol sym, String action) {
     	sym.action = action;
+    	this.actions.put(sym.character, action);
     }
     
     public  void setAxiom(String str){
@@ -58,7 +67,7 @@ public class LSystem {
     }
      
     public Sequence getAxiom(){
-    	return LSystem.axiom;
+    	return this.axiom;
     }
     
     public Symbol.Seq rewrite(Symbol sym) {
@@ -73,8 +82,9 @@ public class LSystem {
     		}
     }
     
+    
     public void tell(Turtle turtle, Symbol sym) {
-    	String action = sym.action;
+    	String action = this.actions.get(sym.character);
     	
     	if("draw".equals(action))
     		turtle.draw(); 
@@ -91,20 +101,24 @@ public class LSystem {
     	
     	turtle_posX.add(turtle.getPosition().getX());
     	turtle_posY.add(turtle.getPosition().getY());
+    	turtle_angle.add(turtle.getAngle());
+    	
+    	 	
     }
  
     /* opérations avancées */
     public Symbol.Seq applyRules(Symbol.Seq seq, int n) {
+    	System.out.println("apply rules");
     	if(n==0) {
     		return seq;
-    	}
-       
-        while (seq.hasNext()) {
+    	}while (seq.hasNext()) {
             Symbol sym = charToSym.get(seq.next());
             this.sequebceFinal.seq = this.sequebceFinal.seq + rewrite(sym);
             }
         applyRules(this.sequebceFinal,n-1);
-        return this.sequebceFinal;// Retourne la sequence final 
+
+       return this.sequebceFinal;// Retourne la sequence final 
+
     	
     }
     

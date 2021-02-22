@@ -25,17 +25,12 @@ public class Main {
 			String SequenceFInal = lSyst.sequebceFinal.seq;
 			System.out.println(SequenceFInal);
 			
-			
-			
-			
-			lSyst.tell(tortue, null);
-			
-			
-		
-		
+			for(int i = 0; i< SequenceFInal.length();i++) {
+				lSyst.tell(tortue, (Symbol)lSyst.charToSym.get(""+SequenceFInal.charAt(i)));
+				System.out.println(lSyst.actions.get(""+SequenceFInal.charAt(i))+ " : " + lSyst.turtle_posX.get(i) +
+				          lSyst.turtle_posY.get(i) + lSyst.turtle_angle.get(i));
+			}
+
 		}
-		
-		
-		
 
 }
