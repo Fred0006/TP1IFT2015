@@ -12,7 +12,7 @@ public class MyTurtle implements Turtle {
     
 	public MyTurtle(){
 		currentState = new State();
-		previousStates = new Stack<>();
+		previousStates = new Stack<State>();
 		}
 	
 	public void setPosition(double posX ,double posY, double angle) {

@@ -78,7 +78,8 @@ public class LSystem {
     }
     
     
-    public void tell(Turtle turtle, Symbol sym) {
+
+	public void tell(Turtle turtle, Symbol sym) {
     	String action = this.actions.get(sym.character);
     	
     	if("draw".equals(action))
@@ -97,17 +98,18 @@ public class LSystem {
     	turtle_posX.add(turtle.getPosition().getX());
     	turtle_posY.add(turtle.getPosition().getY());
     	turtle_angle.add(turtle.getAngle());
-    	
-    	 	
+     	 	
     }
- 
+	
+	
     /* opérations avancées */
+    
     public Symbol.Seq applyRules(Symbol.Seq seq, int n) {
     	System.out.println("apply rules");
     	if(n==0) {
     		return seq;
     	}
-    	
+ 
         while (seq.hasNext()) {
             Symbol sym = charToSym.get(seq.next());
             this.sequebceFinal.seq = this.sequebceFinal.seq + rewrite(sym);
@@ -116,6 +118,8 @@ public class LSystem {
         return  this.sequebceFinal;  // Retourne la sequence final 
     	
     }
+    
+    
     
     /* retourne BoundingBox pour le dessin */
     public Rectangle2D tell(Turtle turtle, Symbol.Seq seq, int n){

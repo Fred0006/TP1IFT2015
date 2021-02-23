@@ -10,15 +10,12 @@ public class Symbol {
         this.character = character;
     }
 
-    public Symbol(String character, String action){
-        this.character = character;
-        this.action = action;
-    }
-    
+     
     public interface Seq extends Iterable<Symbol>{
-		public boolean hasNext();
+			
+    	public boolean hasNext();
 
 		public Character next();
     }
- 
+  
 }
