@@ -28,14 +28,16 @@ public class JSONTools{
 	
 	
 	public JSONTools(String fileName,LSystem S, MyTurtle T) throws IOException  {
+
 		alphabet = new ArrayList<String>(); 
 		rulesSet = new HashMap<String, String[]>();
 		actions  = new HashMap<String, String>() ;
 		parameters = new HashMap<String, ArrayList<?>>();
 		
 		
-		
+	
 		//init vars
+
 		String file = "src/"+ fileName;
 		JSonObjc = readJSONFile(file);
 		extractAlphabet();
@@ -44,7 +46,7 @@ public class JSONTools{
 		// Set LSystem
 		S.setAxiom(this.axiom);
 		createRulesSet(S);
-		setActions(S);
+		setActions();
 		
 		// Set MyTurtle
 		initTortue(T);
@@ -53,6 +55,7 @@ public class JSONTools{
 
 			////.... Variables extraction.....////
 
+	
 		public JSONObject readJSONFile(String file) throws java.io.IOException {
 			
 			JSONObject jSonInput = new JSONObject(new JSONTokener(new java.io.FileReader(file)));
@@ -63,12 +66,15 @@ public class JSONTools{
 		@SuppressWarnings("unchecked")
 		public void extractAlphabet() {
 			JSONArray alph = JSonObjc.getJSONArray("alphabet");
-			//int taille = alph.length();
+
 			for(int i =0; i<alph.length();i++ ) {
 				String sym = (String) alph.get(i);
 				this.alphabet.add(i,sym);
 			}
-			System.out.println("Alphabet fini");
+				for(int i =0; i<alph.length();i++ ) {
+				String sym = (String) alph.get(i);
+				this.alphabet.add(i, sym);
+       }
 		}
 		
 		//axiom
@@ -76,7 +82,6 @@ public class JSONTools{
 			axiom = JSonObjc.getString("axiom");	
 		}
 
-		
 		// rules
 		public void createRulesSet(LSystem LSys) {
 			JSONObject rules = this.JSonObjc.getJSONObject("rules"); 
@@ -85,55 +90,57 @@ public class JSONTools{
 				String letter = this.alphabet.get(i);
 				String str = ""+letter.charAt(0);
 				Symbol sym = new Symbol(str);
-	
-				if (rules.has(letter)) {
-					JSONArray all_rules = rules.getJSONArray(letter);
-					for (int k = 0; k < all_rules.length(); k++) {
+          	if (rules.has(letter)) {
+            JSONArray all_rules = rules.getJSONArray(letter);
+            for (int k = 0; k < all_rules.length(); k++) {
 						LSys.addRule(sym, all_rules.getString(k));
-					}
+					    } 
 				}
 			 }
-			System.out.println("rules fini");
 	  	}	
        
 		
-		public void setActions(LSystem LSys) {
-				JSONObject actions = this.JSonObjc.getJSONObject("actions");
+		public void setActions() {
+			JSONObject actions = this.JSonObjc.getJSONObject("actions");
+					
+			for (int i = 0; i < this.alphabet.size(); i++) {
+				String letter = this.alphabet.get(i);
+				String str = ""+letter.charAt(0);
+				Symbol sym = new Symbol(str);
 	
-				for (int i = 0; i < this.alphabet.size(); i++) {
-					String letter = this.alphabet.get(i);
-					String str = ""+letter.charAt(0);
-					Symbol sym = new Symbol(str);
-		
-					if (actions.has(letter)) {
-		               String letterAction = actions.getString(letter);
-		               LSys.setAction(sym, letterAction);
-					}
+				if (actions.has(letter)) {
+	               String letterAction = actions.getString(letter);
+	               LSystem.setAction(sym, letterAction);
 				}
-				System.out.println("Actions fini");
+				
+			}
 		}		
 		
 	     
-		public void initTortue(MyTurtle T) {
-		   JSONObject system_params = this.JSonObjc.getJSONObject("parameters"); // tt ce qui a dans parameters
+
+		  public void initTortue(MyTurtle T) {
+
+		    JSONObject system_params = this.JSonObjc.getJSONObject("parameters"); // tt ce qui a dans parameters
 
 	       JSONArray startJSON = system_params.getJSONArray("start"); // recupere le tableau start
 	       
 	       double start[] = new double[3];
 	       for(int n=0; n<=2; n++){
 	           start[n] = startJSON.getDouble(n);
-	       }
+	      }
 	       
 	       double unit_step = system_params.getDouble("step");
 	       double unit_angle = system_params.getDouble("angle");
-	       
+
 	       // Update MyTurtle
 	       T.init(new Point2D.Double(start[0],start[1]),start[2]);
 		   
 	       T.setUnits(unit_step, unit_angle);
 		
 	       System.out.println("totue int fini");
-		}
+      }
+
+	 
 	
 }
 

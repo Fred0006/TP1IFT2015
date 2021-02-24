@@ -17,12 +17,14 @@ public class LSystem {
     public static HashMap<String,Symbol> charToSym = new HashMap<>(); // permet de faire le lien entre le nouveua charactère jouter et sa classe symbole
     public static HashMap<Symbol, ArrayList<Sequence>> rules;
     // Je l'est changé en type Sequence parceque getAxion nous oblige à retourner un element de type Symbol.seq
+
 	public  Sequence axiom;
-	public HashMap<String, String> actions;
+
+	public static HashMap<String, String> actions;
 	// Tous les symbols n'ont pas de  rules mais on peut rajouter des rules ç un symbol qui n'en avait pas.
 	public HashMap<String, ArrayList[]> parameters; // pas sur des assignation pour le hashMap
 	
-	public static Sequence sequebceFinal;
+	public Sequence sequebceFinal;
 	
     public LSystem() {
     	rules = new HashMap<Symbol, ArrayList<Sequence>> ();
@@ -32,7 +34,10 @@ public class LSystem {
 	
 	// changement de la fonction en static car utilisation dans le JSON
 	
+
     public Symbol addSymbol(String sym) {
+
+    
     	Symbol symbol = new Symbol(sym);
     	charToSym.put(sym,symbol); //charToSym transformé en static dû au changement de la fonction en static
 		return symbol; // pareil à cahrTosym
@@ -52,9 +57,9 @@ public class LSystem {
     	}
     }
     
-    public void setAction(Symbol sym, String action) {
+    public static void setAction(Symbol sym, String action) {
     	sym.action = action;
-    	this.actions.put(sym.character, action);
+    	LSystem.actions.put(sym.character, action);
     }
     
     public  void setAxiom(String str){
@@ -108,17 +113,17 @@ public class LSystem {
     	System.out.println("apply rules");
     	if(n==0) {
     		return seq;
-    	}
- 
-        while (seq.hasNext()) {
-            Symbol sym = charToSym.get(seq.next());
-            this.sequebceFinal.seq = this.sequebceFinal.seq + rewrite(sym);
-            }
-        applyRules(this.sequebceFinal,n-1);
-        return  this.sequebceFinal;  // Retourne la sequence final 
-    	
-    }
+    		} else {
+		        while (seq.hasNext()) {
+		
+		            Symbol sym = charToSym.get(seq.next());
+		            this.sequebceFinal.seq = this.sequebceFinal.seq + rewrite(sym);
+		            }
+		        applyRules(this.sequebceFinal,n-1);
+    		}
+       return this.sequebceFinal;// Retourne la sequence final 
     
+    }
     
     
     /* retourne BoundingBox pour le dessin */

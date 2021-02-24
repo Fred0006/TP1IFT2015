@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import lindermayer.Symbol.Seq;
 
-class Sequence implements Seq {// implementer une liste de symbol
+class Sequence implements Seq {
 	
 	public String seq;
     public static int index = 0;
