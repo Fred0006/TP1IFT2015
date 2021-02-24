@@ -1,3 +1,4 @@
+
 package lindermayer;
 
 
@@ -18,12 +19,8 @@ public class Symbol {
     }
     
     public interface Seq extends Iterable<Symbol>{
-  	public boolean hasNext();
+    	public boolean hasNext();
 		public Character next();
     }
-   
-
-		public Character next();
-    }
- 
+  
 }

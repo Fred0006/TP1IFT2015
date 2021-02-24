@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import lindermayer.Symbol.Seq;
 
-class Sequence implements Seq {// implementer une liste de symbol
+class Sequence implements Seq {
 	
 	public String seq;
-    public int index = 0;
+    public static int index = 0;
     public ArrayList<Symbol> listSymbol = new ArrayList<>();
     
     public Sequence(String seq){
@@ -24,12 +24,14 @@ class Sequence implements Seq {// implementer une liste de symbol
 	}
 	
     public boolean hasNext(){
-        return index < seq.length();
+    	  if (index < seq.length()) return true;
+        return false;
     }
 
     public Character next(){
-        index++;
-        return seq.charAt(index-1);
+        char ans = seq.charAt(index);
+    	index++;
+        return ans;
     }
 	
     public String toString() {

@@ -4,15 +4,14 @@ import java.awt.geom.Point2D;
 import java.util.Stack;
 
 public class MyTurtle implements Turtle {
-	public int distanceD; // A Revoir son utilite
 	public State currentState;
-    public Stack<State> previousStates;
+    public Stack<State> statesHistory;
     public double distanceUnitaire;
     public double angleUnitaire;
     
 	public MyTurtle(){
 		currentState = new State();
-		previousStates = new Stack<>();
+		statesHistory = new Stack<State>();
 		}
 	
 	public void setPosition(double posX ,double posY, double angle) {
@@ -46,12 +45,12 @@ public class MyTurtle implements Turtle {
     }
 
     public void push() {
-    	previousStates.push(currentState);
+    	statesHistory.push(currentState);
     }
 
     public void pop() {
-    	previousStates.pop();
-    	currentState = previousStates.peek();
+    	statesHistory.pop();
+    	currentState = statesHistory.peek();
     }
 
     public void stay() {
@@ -60,7 +59,7 @@ public class MyTurtle implements Turtle {
 
     public void init(Point2D position, double angle_deg) {
     	currentState.setState(position.getX() , position.getY() , angle_deg);
-    	previousStates.clear();
+    	statesHistory.clear();
     }
 
     public Point2D getPosition() {

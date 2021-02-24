@@ -46,18 +46,11 @@ public class JSONTools{
 		// Set LSystem
 		S.setAxiom(this.axiom);
 		createRulesSet(S);
-		setActions(S);
+		setActions();
 		
 		// Set MyTurtle
 		initTortue(T);
 		
-	}			
-
-			////.... Variables extraction.....////
-=======
-		
-		// Set MyTurtle
-		MyTurtleSetUnits(T);
 	}			
 
 			////.... Variables extraction.....////
@@ -107,38 +100,20 @@ public class JSONTools{
 	  	}	
        
 		
-		public void setActions(LSystem LSys) {
-				JSONObject actions = this.JSonObjc.getJSONObject("actions");
-
-	       }
-	  	}	
-       
-		
 		public void setActions() {
-			JSONObject actions = jSonInput.getJSONObject("actions");
+			JSONObject actions = this.JSonObjc.getJSONObject("actions");
+					
+			for (int i = 0; i < this.alphabet.size(); i++) {
+				String letter = this.alphabet.get(i);
+				String str = ""+letter.charAt(0);
+				Symbol sym = new Symbol(str);
 	
-				if (actions.has(letter)) {
-					String letterAction = actions.getString(letter);
-					setAction(sym, letterAction);
-				}
-				
 				if (actions.has(letter)) {
 	               String letterAction = actions.getString(letter);
 	               LSystem.setAction(sym, letterAction);
-	           }
-
-		}		
-				for (int i = 0; i < this.alphabet.size(); i++) {
-					String letter = this.alphabet.get(i);
-					String str = ""+letter.charAt(0);
-					Symbol sym = new Symbol(str);
-		
-					if (actions.has(letter)) {
-		               String letterAction = actions.getString(letter);
-		               LSys.setAction(sym, letterAction);
-					}
 				}
 				
+			}
 		}		
 		
 	     

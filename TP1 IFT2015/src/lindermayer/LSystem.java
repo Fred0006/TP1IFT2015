@@ -20,11 +20,11 @@ public class LSystem {
 
 	public  Sequence axiom;
 
-	public HashMap<String, String> actions;
+	public static HashMap<String, String> actions;
 	// Tous les symbols n'ont pas de  rules mais on peut rajouter des rules ç un symbol qui n'en avait pas.
 	public HashMap<String, ArrayList[]> parameters; // pas sur des assignation pour le hashMap
 	
-	public static Sequence sequebceFinal;
+	public Sequence sequebceFinal;
 	
     public LSystem() {
     	rules = new HashMap<Symbol, ArrayList<Sequence>> ();
@@ -57,9 +57,9 @@ public class LSystem {
     	}
     }
     
-    public void setAction(Symbol sym, String action) {
+    public static void setAction(Symbol sym, String action) {
     	sym.action = action;
-    	this.actions.put(sym.character, action);
+    	LSystem.actions.put(sym.character, action);
     }
     
     public  void setAxiom(String str){
@@ -83,7 +83,8 @@ public class LSystem {
     }
     
     
-    public void tell(Turtle turtle, Symbol sym) {
+
+	public void tell(Turtle turtle, Symbol sym) {
     	String action = this.actions.get(sym.character);
     	
     	if("draw".equals(action))
@@ -102,25 +103,28 @@ public class LSystem {
     	turtle_posX.add(turtle.getPosition().getX());
     	turtle_posY.add(turtle.getPosition().getY());
     	turtle_angle.add(turtle.getAngle());
-    	
-    	 	
+     	 	
     }
- 
+	
+	
     /* opérations avancées */
+    
     public Symbol.Seq applyRules(Symbol.Seq seq, int n) {
     	System.out.println("apply rules");
     	if(n==0) {
     		return seq;
-    	}while (seq.hasNext()) {
-            Symbol sym = charToSym.get(seq.next());
-            this.sequebceFinal.seq = this.sequebceFinal.seq + rewrite(sym);
-            }
-        applyRules(this.sequebceFinal,n-1);
-
+    		} else {
+		        while (seq.hasNext()) {
+		
+		            Symbol sym = charToSym.get(seq.next());
+		            this.sequebceFinal.seq = this.sequebceFinal.seq + rewrite(sym);
+		            }
+		        applyRules(this.sequebceFinal,n-1);
+    		}
        return this.sequebceFinal;// Retourne la sequence final 
-
-    	
+    
     }
+    
     
     /* retourne BoundingBox pour le dessin */
     public Rectangle2D tell(Turtle turtle, Symbol.Seq seq, int n){
